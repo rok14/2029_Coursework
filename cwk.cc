@@ -1,6 +1,8 @@
 #include <iostream>
-#include <stdlib.h> 
+#include <stdlib.h>
+#include <utility>
 
+using namespace std::rel_ops;
 using namespace std;
 
 int gcd( int n, int m)
@@ -14,7 +16,20 @@ int gcd( int n, int m)
 	}
 	return 1;
 } //(1 mark) remove the semicolon (;) if you add code;
-int lcm( int n, int m); //(1 mark) only classes end with a semicolon (;).
+int lcm( int n, int m)
+{
+	for(int i=1;i<=min(n,m);i++)
+	{
+		for(int j=1;j<=max(n,m);j++)
+		{
+			if(max(n,m)*i==min(n,m)*j)
+			{
+				return max(n,m)*i;
+			}
+		}
+	}
+	return m*n;
+} //(1 mark) only classes end with a semicolon (;).
 class fraction {
 	public:
 		fraction() : numer(0), denomer(1) {} //(1 mark) 0/1
@@ -35,12 +50,17 @@ class fraction {
 		int numerator() const { return numer; }// (1 mark)
 		int denominator() const { return denomer; }// (1 mark)
 		// methods below - 2 marks each
-		bool operator==(const fraction &o)
+		bool operator==(const fraction &o) const
 		{
 			return o.denominator() == denomer && o.numerator()==numer;
 		}
 		//(2 marks) use utility & rel_ops to
-		//bool operator<(const fraction &o); //(2 marks) get the other operators
+		bool operator<(const fraction &o) const
+		{
+			int lcmul = lcm(denominator(), o.denominator());
+			return o.numerator()*(lcmul/o.denominator()) > numerator()*(lcmul/denominator());
+		}
+		//(2 marks) get the other operators
 		//fraction &operator+=(const fraction &o);//(2 marks)
 		//fraction &operator-=(const fraction &o);//(2 marks)
 		//fraction &operator*=(const fraction &o);//(2 marks)
@@ -85,9 +105,7 @@ istream & operator>>( istream &os, fraction &f)
 int main()
 {
 	fraction f;
-	while(cin >>f && f.denominator()!=0)
-	{
-		cout << f << '\n';
-	}
+    fraction z(3,6);
+	cout << (f>z) << '\n';
 	return 0;
 }*/

@@ -29,7 +29,27 @@ int main () {
 	a = fraction(4,6);
 	ans = d==a ;
 	output << ans << '\n';
-		
+	//test lcm
+	output << lcm(2, 5) << '\n';
+	//test lcm
+	output << lcm(4, 2) << '\n';
+	//test lcm
+	output << lcm(6, 4) << '\n';
+	//test lcm
+	output << lcm(1, 1) << '\n';
+	//test lcm
+	output << lcm(10, 15) << '\n';
+	//test < operator
+	d = fraction(6,13);
+	a = fraction(4,6);
+	ans = d<a ;
+	output << ans << '\n';
+	//test > operator
+	d = fraction(6,13);
+	a = fraction(4,6);
+	ans = d>a ;
+	output << ans << '\n';
+	
 	output.close();	
 	//now read the results and validate them
 	ifstream results("TestOutput_rokas.txt");
@@ -66,6 +86,48 @@ int main () {
 		cout << "FAIL: " << line << '\n';
 	}
 	//operator ==
+	getline(results, line);
+	if(line!="0")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test lcm
+	getline(results, line);
+	if(line!="10")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test   lcm
+	getline(results, line);
+	if(line!="4")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test lcm
+	getline(results, line);
+	if(line!="12")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test lcm
+	getline(results, line);
+	if(line!="1")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test  lcm 
+	getline(results, line);
+	if(line!="30")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//operator <
+	getline(results, line);
+	if(line!="1")
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//operator >
 	getline(results, line);
 	if(line!="0")
 	{
