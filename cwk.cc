@@ -38,9 +38,9 @@ class fraction {
 		{
 			if(m!=0)
 			{
-					int gcdiv=gcd(n ,m);
-					numer = n/gcdiv;
-					denomer =m/gcdiv;
+					numer = n;
+					denomer =m;
+					simplify();
 			}else
 			{
 				numer=0;
@@ -61,12 +61,44 @@ class fraction {
 			return o.numerator()*(lcmul/o.denominator()) > numerator()*(lcmul/denominator());
 		}
 		//(2 marks) get the other operators
-		//fraction &operator+=(const fraction &o);//(2 marks)
-		//fraction &operator-=(const fraction &o);//(2 marks)
-		//fraction &operator*=(const fraction &o);//(2 marks)
-		//fraction &operator/=(const fraction &o);//(2 marks)
+		fraction &operator+=(const fraction &o)//(2 marks)
+		{
+			int lcmul = lcm(denominator(), o.denominator());
+			numer = o.numerator()*(lcmul/o.denominator()) + numerator()*(lcmul/denominator());
+			denomer = lcmul;
+			simplify();
+			return *this;
+		}
+		fraction &operator-=(const fraction &o)//(2 marks)
+		{
+			int lcmul = lcm(denominator(), o.denominator());
+			numer = numerator()*(lcmul/denominator()) - o.numerator()*(lcmul/o.denominator());
+			denomer = lcmul;
+			simplify();
+			return *this;			
+		}
+		fraction &operator*=(const fraction &o)//(2 marks)
+		{
+			numer = numerator() * o.numerator();
+			denomer = denominator() * o.denominator();
+			simplify();
+			return *this;
+		}
+		fraction &operator/=(const fraction &o)//(2 marks)
+		{
+			numer = numerator() * o.denominator();
+			denomer = denominator() * o.numerator();
+			simplify();
+			return *this;
+		}
 	private:
 		int numer, denomer;
+		void simplify()
+		{
+			int gcdiv=gcd(numer ,denomer);
+			numer = numer/gcdiv;
+			denomer =denomer/gcdiv;
+		}
 	// ...
 };
 // you need the following for all operators - they’re too simple; see
