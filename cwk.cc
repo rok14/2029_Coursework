@@ -1,10 +1,13 @@
+//rokas: if you change the code pls re-run TestCases_Rokas before comiting. Feel free to add your own test cases.
 #include <iostream>
 #include <stdlib.h>
 #include <utility>
+#include <vector>
+#include <algorithm>
 
 using namespace std::rel_ops;
 using namespace std;
-
+//2.1 Divide and Conquer. . . (25 marks)
 int gcd( int n, int m)
 {
 	for(int i=min(n,m);i>0;i--)
@@ -103,9 +106,53 @@ class fraction {
 };
 // you need the following for all operators - they’re too simple; see
 // the first one. 1 mark for all 12 of them. (1 mark)
-//fraction operator+(fraction a, fraction b) {return a+=b;}
-//fraction operator+(int a, fraction b);
-//fraction operator+(fraction a, int b); // same for -,*,/
+fraction operator+(fraction a, fraction b) {return a+=b;}
+fraction operator+(int a, fraction b) 
+{
+	fraction af(a, 1);
+	return af+=b;
+}
+fraction operator+(fraction a, int b)
+{
+	fraction bf(b, 1);
+	return a+=bf;
+}
+//-
+fraction operator-(fraction a, fraction b) {return a-=b;}
+fraction operator-(int a, fraction b) 
+{
+	fraction af(a, 1);
+	return af-=b;
+}
+fraction operator-(fraction a, int b)
+{
+	fraction bf(b, 1);
+	return a-=bf;
+}
+//*
+fraction operator*(fraction a, fraction b) {return a*=b;}
+fraction operator*(int a, fraction b) 
+{
+	fraction af(a, 1);
+	return af*=b;
+}
+fraction operator*(fraction a, int b)
+{
+	fraction bf(b, 1);
+	return a*=bf;
+}
+// /
+fraction operator/(fraction a, fraction b) {return a/=b;}
+fraction operator/(int a, fraction b) 
+{
+	fraction af(a, 1);
+	return af/=b;
+}
+fraction operator/(fraction a, int b)
+{
+	fraction bf(b, 1);
+	return a/=bf;
+}
 // 2 marks each for the following two
 ostream & operator<<( ostream &os, const fraction &f)
 {
@@ -132,12 +179,29 @@ istream & operator>>( istream &os, fraction &f)
 	}
 	return os;
 }
-
-/*
-int main()
+//2.2 Sampling
+class sample
 {
-	fraction f;
-    fraction z(3,6);
-	cout << (f>z) << '\n';
-	return 0;
-}*/
+	//Q-1. (1 mark ) How could you have forced programmers using your class to not initialise empty sampleobjects (i.e., without providing a vector to initialise them with)?
+	//ANSWER: This could be done by not providing default constructor. When there's no default constructor and a programmer tries to initialise an empty object the code doesn't compile.
+
+	public:
+		sample(){}
+		sample(vector<double> vec): measurement(vec){}
+		const vector<double> &get_data(){ return measurement;}
+		void set_data(const vector<double> &v){ measurement = v;}
+	private:
+		vector<double> measurement;
+};
+
+ostream & operator<<( ostream &os, sample &s)
+{
+	const vector<double> data = s.get_data();//
+	os << "< " << data.size() << ": ";
+	for(vector<double>::const_iterator it= data.begin(); it!= data.end(); it++)
+	{
+		os << *it << " ";
+	}
+	os << ">";
+	return os;
+}	

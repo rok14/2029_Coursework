@@ -3,6 +3,7 @@
 #include <fstream>
 using namespace std;
 
+//Test cases for the first part.
 int main () {
 	
 	ofstream output;
@@ -74,9 +75,31 @@ int main () {
 	//test /= operator
 	d/=a;
 	output << d << '\n';
+	//test  operator+(int a, fraction b)
+	int i = 5;
+	a = fraction(1, 2);
+	fraction anz = i + a;
+	output << anz << '\n'; //11/2
+	//test  operator+(fraction a, int b)
+	anz = a + i; 
+	output << anz << '\n'; //11/2
+	
+	//test sample << operator
+	vector<double> tv;
+	tv.push_back(1);
+	tv.push_back(1.2);
+	tv.push_back(1.3);
+	tv.push_back(1.4);
+	tv.push_back(1.5);
+	sample s(tv);
+	output << s << '\n';
+	tv.push_back(1.6);
+	s.set_data(tv);
+	output << s << '\n';
 	
 	
 	output.close();	
+	//------------------------------------------------------------------------------------------------------------------
 	//now read the results and validate them
 	ifstream results("TestOutput_rokas.txt");
 	string line;
@@ -198,6 +221,30 @@ int main () {
 	//operator /=
 	getline(results, line);
 	if(line!="1/2") 
+	{
+		cout << "FAIL: " << line << '\n';     
+	}
+	//operator int+fraction
+	getline(results, line);
+	if(line!="11/2") 
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//operator fraction+int
+	getline(results, line);
+	if(line!="11/2") 
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample << operator
+	getline(results, line);
+	if(line!="< 5: 1 1.2 1.3 1.4 1.5 >")  	 
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample set_data
+	getline(results, line);
+	if(line!="< 6: 1 1.2 1.3 1.4 1.5 1.6 >")  	 
 	{
 		cout << "FAIL: " << line << '\n';
 	}
