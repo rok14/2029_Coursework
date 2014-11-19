@@ -244,7 +244,7 @@ int main () {
 	}
 	//test sample set_data
 	getline(results, line);
-	if(line!="< 6: 1 1.2 1.3 1.4 1.5 1.6 >")  	 
+	if(line!="< 6: 1 1.2 1.3 1.4 1.5 1.6 >")  	  
 	{
 		cout << "FAIL: " << line << '\n';
 	}

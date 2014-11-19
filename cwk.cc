@@ -187,21 +187,34 @@ class sample
 
 	public:
 		sample(){}
-		sample(vector<double> vec): measurement(vec){}
-		const vector<double> &get_data(){ return measurement;}
-		void set_data(const vector<double> &v){ measurement = v;}
+		sample(vector<double> vec): measurement(vec){} 
+		const vector<double> &get_data(){ return measurement;} //Q-3
+		void set_data(const vector<double> &v){ measurement = v;} //Q-4
 	private:
 		vector<double> measurement;
 };
 
-ostream & operator<<( ostream &os, sample &s)
+//Q-2. (1 mark ) Overload the << operator so that you can write a sample to an output stream.
+//The output format should be:
+//’<’ space int ’:’ space num1 space ... numN space ’>’,
+//e.g., < 2: 10.3 35 >. Do NOT change the format.
+template<class T> struct print_it : public unary_function<T, void>
+{
+	ostream &os;
+	print_it(ostream& o) : os(o){}
+	void operator()(T x){ os << x << " "; }
+};
+ostream & operator<<( ostream &os, sample &s) 
 {
 	const vector<double> data = s.get_data();//
 	os << "< " << data.size() << ": ";
+	/*
 	for(vector<double>::const_iterator it= data.begin(); it!= data.end(); it++)
 	{
 		os << *it << " ";
-	}
+	}*/
+	//using unary_function is probably slower but looks a lot cooler than the loop above!
+	for_each(begin(data), end(data), print_it<double>(os));
 	os << ">";
 	return os;
 }	

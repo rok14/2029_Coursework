@@ -1,0 +1,1 @@
+g++ -std=c++0x -pedantic -Wall -g pisspants.cc -o pisspants
