@@ -96,13 +96,52 @@ int main () {
 	tv.push_back(1.6);
 	s.set_data(tv);
 	output << s << '\n';
+	output << s.minimum() << '\n';
+	tv.push_back(0.6);
+	s.set_data(tv);
+	output << s.minimum() << '\n';
+	output << s.maximum() << '\n';
+	output << s.range() << '\n';
+	output << s.midrange() << '\n';
+	vector<double> tvv;
+	tvv.push_back(1);
+	tvv.push_back(2);
+	tvv.push_back(3);
+	sample ss(tvv);
+	output << ss.mean() << '\n';
+	output << ss.variance() << '\n';
+	output << ss.median() << '\n';
+	output << s.median() << '\n';
+	tvv.push_back(4);
+	sample sss(tvv);
+	output << sss.median() << '\n';
+	output << s << '\n';
+	output << "<7:1            1.2 1.3 1.4 1.5 1.6 0.6>" << '\n';
+	output << ss << '\n';
+	output << sss << '\n';
+	output << "<2: 1.7976931348623157e+308 1.7976931348623157e+308 >" << '\n';
 	
+	vector<fraction> fa;
+	fa.push_back(fraction(1,2));
+	fa.push_back(fraction(1,3));
+	fa.push_back(fraction(1,4));
+	samplet<fraction> fs(fa);
+	output << fs << "\n";
+	output << fs.minimum() << "\n";
+	output << fs.maximum() << "\n";
+	output << fs.range() << "\n";
+	output << fs.midrange() << "\n";
+	output << fs.mean() << "\n";
+	output << fs.variance() << "\n";
+	output << fs.median() << "\n";
+	
+
 	
 	output.close();	
 	//------------------------------------------------------------------------------------------------------------------
 	//now read the results and validate them
-	ifstream results("TestOutput_rokas.txt");
-	string line;
+	ifstream results("TestOutput_rokas.txt"); 
+	string line; 
 	
 	//default constructor
 	getline(results, line);
@@ -248,7 +287,134 @@ int main () {
 	{
 		cout << "FAIL: " << line << '\n';
 	}
-	
+	//test sample minimum
+	getline(results, line);
+	if(line!="1")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample minimum
+	getline(results, line);
+	if(line!="0.6")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample max
+	getline(results, line); 
+	if(line!="1.6")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample range
+	getline(results, line);
+	if(line!="1")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample midrange
+	getline(results, line);
+	if(line!="1.1")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample mean
+	getline(results, line);
+	if(line!="2")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample variance
+	getline(results, line);
+	if(line!="0.666667")  	  
+	{
+		cout << "FAILz: " << line << '\n';
+	}
+	//test sample median
+	getline(results, line);
+	if(line!="2")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample median
+	getline(results, line);
+	if(line!="1.3")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	//test sample median
+	getline(results, line);
+	if(line!="2.5")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	sample s1;
+	results >> s1;
+	if(s1.get_data()!=s.get_data())  	  
+	{
+		cout << "FAIL: " << s1 << '\n';
+		cout << "      " << s << '\n';
+	}
+	results >> s1;
+	if(s1.get_data()!=s.get_data())  	  
+	{
+		cout << "FAIL: " << s1 << '\n';
+		cout << "      " << s << '\n';
+	}
+	results >> s1;
+	if(s1.get_data()!=ss.get_data())  	  
+	{
+		cout << "FAIL: " << s1 << '\n';
+		cout << "      " << ss << '\n';
+	}
+	results >> s1;
+	if(s1.get_data()!=sss.get_data())  	  
+	{
+		cout << "FAIL: " << s1 << '\n';
+		cout << "      " << sss << '\n';
+	}
+	results >> s1;
+	//test samplet << operator
+	getline(results, line);
+	getline(results, line);
+	if(line!="< 3: 1/2 1/3 1/4 >")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="1/4")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="1/2")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="1/4")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="3/8")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="13/36")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+	getline(results, line);
+	if(line!="7/648")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
+		getline(results, line);
+	if(line!="1/3")  	  
+	{
+		cout << "FAIL: " << line << '\n';
+	}
 	results.close();
   return 0;
 }
