@@ -1,0 +1,6 @@
+CXX= g++
+CXXFLAGS = -Wall -pedantic -ansi -g -std=c++0x
+
+main:	Test_pdf	TestCases_rokas	cwk 
+
+clean:	-rm -f *.o core main	
