@@ -3,14 +3,16 @@ FILE DESCRIPTIONS
 cwk.cc -contains the coursework implementation 
 
 TestCases_rokas.cc- test file containing the main() method to test the cwk.cc with various inputs and to then automatically test the output and display 'FAIL' messages ifanything fail.
+TestCases_jijo.cc - another test file
+TestCases_Nick.cc - another test file
 
 TestOutput_rokas.txt - file that is automatically written to as part of testing, containing the output of the test from TestCases_rokas.cc
 
-
-TestCases_jijo.cc - another test file
-
 TestOutput_jijo.txt -file that is automatically written to as part of testing, containing the output of the test from TestCases_jijo.cc
 
-makefile - makefile to compile TestCases_rokas.cc, Test_pdf.cc & TestCases_jijo.cc. COMMAND - make compiles, COMMAND - make clean all removes any executables. 
+TestOutput_Nick.txt - File that contains an output from TestCases_Nick.cc  - Many of the results are written out as PASS or FAIL some may required additional comparison.
+
+makefile - makefile to compile TestCases_rokas.cc, Test_pdf.cc, TestCases_jijo.cc & TestCases_Nick.cc. COMMAND - make compiles, COMMAND - make clean all removes any executables. 
 
  
+
